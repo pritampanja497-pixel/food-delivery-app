@@ -1,2 +1,2 @@
 # food-delivery-app
-this is a full stack MERN project
+This is a full stack MERN project
