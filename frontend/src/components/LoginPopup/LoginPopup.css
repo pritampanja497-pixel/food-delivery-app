@@ -1,0 +1,106 @@
+.login-popup {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s;
+}
+
+.login-popup-container {
+  place-self: center;
+  width: max(23vw, 330px);
+  color: var(--secondary-color);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.login-popup-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+}
+
+.login-popup-title h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.login-popup-title img {
+  width: 16px;
+  cursor: pointer;
+}
+
+.login-popup-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-popup-inputs input {
+  outline: none;
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.login-popup-inputs input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(255, 76, 41, 0.1);
+}
+
+.login-popup-container button {
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  background-color: var(--primary-color);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 76, 41, 0.3);
+}
+
+.login-popup-container button:hover {
+  background-color: #e64425;
+}
+
+.login-popup-condition {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: -5px;
+}
+
+.login-popup-condition input {
+  margin-top: 4px;
+}
+
+.login-popup-container p span {
+  color: var(--primary-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-popup-container p span:hover {
+  text-decoration: underline;
+}

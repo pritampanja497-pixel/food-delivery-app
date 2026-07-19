@@ -1,0 +1,215 @@
+.header {
+  height: 34vw;
+  min-height: 350px;
+  max-height: 550px;
+  margin: 30px auto;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* --- Slides --- */
+.header-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+}
+
+.header-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slide-1 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('/banner3.png');
+}
+
+.slide-2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('/banner1.png');
+}
+
+.slide-3 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('/banner2.png');
+}
+
+
+/* --- Content --- */
+.header-contents {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5vw;
+  max-width: 50%;
+  padding-left: 6vw;
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.header-contents h2 {
+  font-weight: 800;
+  color: white;
+  font-size: max(4vw, 26px);
+  line-height: 1.1;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.header-contents p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: max(1.1vw, 13px);
+  line-height: 1.6;
+  font-weight: 400;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-contents button {
+  border: none;
+  color: var(--secondary-color);
+  font-weight: 700;
+  padding: 1vw 2.8vw;
+  background-color: white;
+  font-size: max(1.1vw, 14px);
+  border-radius: 50px;
+  margin-top: 0.5vw;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header-contents button:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: scale(1.06);
+}
+
+/* --- Dot Indicators --- */
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.dot.active {
+  background-color: white;
+  transform: scale(1.3);
+  border-color: var(--primary-color);
+}
+
+.dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- Arrows --- */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 2.5rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition: all 0.3s ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.slider-arrow:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slider-arrow-left {
+  left: 15px;
+}
+
+.slider-arrow-right {
+  right: 15px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1050px) {
+  .header-contents {
+    max-width: 65%;
+  }
+}
+
+@media (max-width: 750px) {
+  .header {
+    height: 50vw;
+    min-height: 280px;
+  }
+  .header-contents {
+    max-width: 80%;
+    gap: 2vw;
+  }
+  .header-contents p {
+    font-size: max(2.2vw, 12px);
+  }
+  .header-contents button {
+    padding: 2vw 5vw;
+    font-size: max(2.5vw, 13px);
+  }
+  .slider-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 70vw;
+    min-height: 220px;
+    border-radius: 12px;
+  }
+  .header-contents h2 {
+    font-size: 6.5vw;
+  }
+  .header-contents p {
+    display: none;
+  }
+  .slider-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 1.4rem;
+  }
+  .slider-dots {
+    bottom: 12px;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+  }
+}
