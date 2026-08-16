@@ -53,7 +53,6 @@ app.use(express.json());
 app.use(
   cors({
     origin: "*",
-    credentials: true,
   })
 );
 
@@ -64,14 +63,12 @@ app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
 app.get("/", (req, res) => {
-  try {
-    res.json({ message: "Food Delivery API Working" });
-  }catch (err) {
-    console.log(err,"Error")
-    res.json({ message: `${err}` });
-  }
+  res.status(200).json({
+    success: true,
+    message: "Food Delivery API Working",
+  });
 });
 
-connectDB();
+await connectDB();
 
 export default app;
