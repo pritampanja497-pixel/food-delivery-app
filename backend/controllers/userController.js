@@ -42,7 +42,7 @@ const registerUser = async (req, res) => {
     const exists = await userModel.findOne({ email });
 
     if (exists) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         message: "User already exists",
       });
@@ -50,7 +50,7 @@ const registerUser = async (req, res) => {
 
     // Validate email
     if (!validator.isEmail(email)) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         message: "Please enter a valid email",
       });
@@ -58,7 +58,7 @@ const registerUser = async (req, res) => {
 
     // Validate password
     if (password.length < 8) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         message: "Password must be at least 8 characters",
       });
@@ -82,7 +82,7 @@ const registerUser = async (req, res) => {
     const token = createToken(user._id);
 
     // Response
-    res.status(201).json({
+    res.json({
       success: true,
       token,
     });
@@ -90,7 +90,7 @@ const registerUser = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.status(500).json({
+    res.json({
       success: false,
       message: "Server Error",
     });

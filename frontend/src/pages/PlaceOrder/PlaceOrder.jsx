@@ -31,11 +31,6 @@ const PlaceOrder = () => {
   const placeOrder = async (event)=>{
       event.preventDefault();
 
-      if (!showPaymentOptions) {
-        setShowPaymentOptions(true);
-        return;
-      }
-
       let orderItems =[];
       food_list.map((item)=>{
           const itemId = item.id || item._id;
@@ -115,26 +110,22 @@ const PlaceOrder = () => {
               <b>${getTotalCartAmount()===0?0:getTotalCartAmount()+2}</b>
             </div>
           </div>
-          {showPaymentOptions ? (
-            <div className="payment-options">
-              <h3 style={{marginTop: '20px', marginBottom: '10px'}}>Select Payment Method</h3>
-              <div className="payment-option" style={{display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px'}}>
-                <input type="radio" id="stripe" name="payment" value="stripe" onChange={(e) => setPaymentMethod(e.target.value)} checked={paymentMethod === 'stripe'} />
-                <label htmlFor="stripe" style={{cursor: 'pointer'}}>Stripe (Credit/Debit)</label>
-              </div>
-              <div className="payment-option" style={{display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px'}}>
-                <input type="radio" id="cod" name="payment" value="cod" onChange={(e) => setPaymentMethod(e.target.value)} checked={paymentMethod === 'cod'} />
-                <label htmlFor="cod" style={{cursor: 'pointer'}}>Cash On Delivery</label>
-              </div>
-              <div className="payment-option" style={{display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px'}}>
-                <input type="radio" id="upi" name="payment" value="upi" onChange={(e) => setPaymentMethod(e.target.value)} checked={paymentMethod === 'upi'} />
-                <label htmlFor="upi" style={{cursor: 'pointer'}}>UPI</label>
-              </div>
-              <button type='submit' >PLACE ORDER</button>
+          <div className="payment-options">
+            <h3 style={{marginTop: '20px', marginBottom: '10px'}}>Select Payment Method</h3>
+            <div className="payment-option" style={{display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px'}}>
+              <input type="radio" id="stripe" name="payment" value="stripe" onChange={(e) => setPaymentMethod(e.target.value)} checked={paymentMethod === 'stripe'} />
+              <label htmlFor="stripe" style={{cursor: 'pointer'}}>Stripe (Credit/Debit)</label>
             </div>
-          ) : (
+            <div className="payment-option" style={{display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px'}}>
+              <input type="radio" id="cod" name="payment" value="cod" onChange={(e) => setPaymentMethod(e.target.value)} checked={paymentMethod === 'cod'} />
+              <label htmlFor="cod" style={{cursor: 'pointer'}}>Cash On Delivery</label>
+            </div>
+            <div className="payment-option" style={{display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px'}}>
+              <input type="radio" id="upi" name="payment" value="upi" onChange={(e) => setPaymentMethod(e.target.value)} checked={paymentMethod === 'upi'} />
+              <label htmlFor="upi" style={{cursor: 'pointer'}}>UPI</label>
+            </div>
             <button type='submit' >PROCEED TO PAYMENT</button>
-          )}
+          </div>
         </div>
       </div>
     </form>
