@@ -64,7 +64,12 @@ app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
 app.get("/", (req, res) => {
-  res.json({ message: "Food Delivery API Working" });
+  try {
+    res.json({ message: "Food Delivery API Working" });
+  }catch (err) {
+    console.log(err,"Error")
+    res.json({ message: `${err}` });
+  }
 });
 
 connectDB();
