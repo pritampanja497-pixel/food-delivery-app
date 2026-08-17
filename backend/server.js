@@ -29,6 +29,7 @@
 
 import express from "express";
 import cors from "cors";
+import connectDB from "./config/db.js";
 
 const app = express();
 
@@ -38,5 +39,7 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.send("API Working");
 });
+
+connectDB();
 
 export default app;
