@@ -7,10 +7,11 @@
   "main": "server.js",
   "type":"module",
   "scripts": {
-    "server":"nodemon server.js",
-    "seed":"node seed.js"
+  "start": "node server.js",
+  "server": "nodemon server.js",
+  "seed": "node seed.js"
+},
 
-  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.2",
