@@ -5,7 +5,7 @@ import cloudinary from "../config/cloudinary.js";
 const addFood = async (req, res) => {
   try {
     if (!req.file) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         message: "Image is required",
       });
@@ -43,16 +43,16 @@ const addFood = async (req, res) => {
       message: "Food Added",
     });
   } catch (error) {
-    console.error("Add food error:", error);
+    console.error("ADD FOOD ERROR:", error);
 
-    res.json({
+    res.status(500).json({
       success: false,
-      message: "Error adding food",
+      message: error.message,
     });
   }
 };
 
-// All food list
+// Get all food items
 const listFood = async (req, res) => {
   try {
     const { category } = req.query;
@@ -70,11 +70,11 @@ const listFood = async (req, res) => {
       data: foods,
     });
   } catch (error) {
-    console.error("List food error:", error);
+    console.error("LIST FOOD ERROR:", error);
 
-    res.json({
+    res.status(500).json({
       success: false,
-      message: "Error",
+      message: error.message,
     });
   }
 };
@@ -82,30 +82,36 @@ const listFood = async (req, res) => {
 // Remove food item
 const removeFood = async (req, res) => {
   try {
-    const food = await foodModel.findById(req.body.id);
+    const { id } = req.body;
+
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "Food ID is required",
+      });
+    }
+
+    const food = await foodModel.findById(id);
 
     if (!food) {
-      return res.json({
+      return res.status(404).json({
         success: false,
         message: "Food not found",
       });
     }
 
-    await foodModel.findByIdAndDelete(req.body.id);
+    await foodModel.findByIdAndDelete(id);
 
-    // Delete image from Cloudinary if a Cloudinary public ID is stored.
-    // We are currently storing the secure URL, so MongoDB deletion is handled here.
-    
     res.json({
       success: true,
       message: "Food Removed",
     });
   } catch (error) {
-    console.error("Remove food error:", error);
+    console.error("REMOVE FOOD ERROR:", error);
 
-    res.json({
+    res.status(500).json({
       success: false,
-      message: "Error",
+      message: error.message,
     });
   }
 };
