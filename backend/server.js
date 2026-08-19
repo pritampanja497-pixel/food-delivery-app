@@ -38,7 +38,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB before API routes
 app.use(async (req, res, next) => {
   try {
     await connectDB();
@@ -48,7 +47,7 @@ app.use(async (req, res, next) => {
 
     res.status(500).json({
       success: false,
-      message: "Database connection failed",
+      message: error.message,
     });
   }
 });
