@@ -30,6 +30,7 @@
 import express from "express";
 import cors from "cors";
 import connectDB from "./config/db.js";
+
 import foodRouter from "./routes/foodRoute.js";
 
 const app = express();
@@ -37,12 +38,25 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/food", foodRouter);
+// Connect to MongoDB before API routes
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection failed:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Database connection failed",
+    });
+  }
+});
 
 app.get("/", (req, res) => {
   res.send("API Working");
 });
 
-connectDB();
+app.use("/api/food", foodRouter);
 
 export default app;
